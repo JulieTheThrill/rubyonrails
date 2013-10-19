@@ -14,4 +14,12 @@ class SurveyQuestion < ActiveRecord::Base
     return QUESTION_TYPES
   end
 
+  def is_multiple_choice?
+    return self.question_type == MULT_CHOICE.to_s
+  end
+
+  def is_text_response?
+    return self.question_type == TEXT_RESPONSE.to_s
+  end
+
 end
