@@ -51,6 +51,12 @@
               <%= builder.text_field :response_list, {:class => "form-control", :placeholder => "response_1,response_2"} %>
             </div>
           </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <%= builder.label :_destroy, "Remove Question" %>
+              <%= builder.check_box :_destroy %>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
