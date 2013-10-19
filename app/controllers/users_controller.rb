@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url
     else
-      flash[:notice] = "Form is invalid"
+      flash[:error] = "Form is invalid"
       flash[:color]= "invalid"
       render "new"
     end
