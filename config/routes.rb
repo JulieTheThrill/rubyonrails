@@ -26,6 +26,8 @@ Rubyonrails::Application.routes.draw do
   post 'login_attempt' => 'sessions#login_attempt'
   get 'logout' => 'sessions#logout'
 
+  resources :surveys
+
   # Example resource route with options:
   #   resources :products do
   #     member do
