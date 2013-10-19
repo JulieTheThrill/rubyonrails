@@ -1,6 +1,10 @@
 class SurveysController < ApplicationController
-  before_action :set_survey, only: [:show, :edit, :update, :destroy]
-  before_filter :admin_required
+  before_action :set_survey, only: [:show, :edit, :update, :destroy, :take_survey]
+  before_filter :admin_required, except: [:take_survey]
+
+  def take_survey
+
+  end
 
   # GET /surveys
   # GET /surveys.json
@@ -66,7 +70,7 @@ class SurveysController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
-      @survey = Survey.find(params[:id])
+      @survey = Survey.find(params[:id] || params[:survey_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -30,7 +30,9 @@ Rubyonrails::Application.routes.draw do
   post 'login_attempt' => 'sessions#login_attempt'
   get 'logout' => 'sessions#logout'
 
-  resources :surveys
+  resources :surveys do
+    get 'take_survey'
+  end
 
   # Example resource route with options:
   #   resources :products do

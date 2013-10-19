@@ -1,0 +1,12 @@
+<h2><%= @survey.name %></h2>
+
+<% @survey.survey_questions.each do |question| %>
+  <p><%= question.question %></p>
+  <% if question.is_multiple_choice? %>
+    <% question.response_list.split(",").each do |response| %>
+      <p><%= response %></p>
+    <% end %>
+  <% elsif question.is_text_response? %>
+    <%= text_area_tag "", "" %>
+  <% end %>
+<% end %>
