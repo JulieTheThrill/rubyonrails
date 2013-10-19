@@ -1,11 +1,12 @@
 <h2><%= @survey.name %></h2>
 <p><%= @survey.description %></p>
 
-<ul>
-  <% for q in @survey.survey_questions %>
-    <li><%= h q.question %></li>
-  <% end %>
-</ul>
+<h3>Questions</h3>
+<% @survey.survey_questions.each_with_index do |q, index| %>
+  <p><%= "#{index + 1}) #{h q.question}" %></p>
+  <p><%= "Type: #{h q.question_type}" %></p>
+  <p><%= "Responses: #{h q.response_list.gsub("_", "").split(",").to_sentence}" %></p>
+<% end %>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>
