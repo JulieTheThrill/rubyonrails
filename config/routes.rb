@@ -18,6 +18,9 @@ Rubyonrails::Application.routes.draw do
 
   get 'day/one' => 'days#one'
 
+  get 'signup' => 'users#new'
+
+  resources :users
   # Example resource route with options:
   #   resources :products do
   #     member do
