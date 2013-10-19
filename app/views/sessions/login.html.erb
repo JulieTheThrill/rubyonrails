@@ -1,0 +1,21 @@
+<% @page_title = "UserAuth | Login" -%>
+<div class="Sign_Form well">
+  <fieldset>
+    <legend>Log in</legend>
+    <%= form_tag(:action => 'login_attempt') do %>
+      <div class="form-group">
+        <%= label_tag "username_or_email", "Username or Email", {:class => "col-lg-2 control-label"} %>
+        <div class="col-lg-10">
+          <%= text_field_tag :username_or_email, "", {:class => "form-control", :placeholder => "Username or email"} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= label_tag "login_password", "Password", {:class => "col-lg-2 control-label"} %>
+        <div class="col-lg-10">
+          <%= password_field_tag :login_password, "", {:class => "form-control", :placeholder => "Password"} %>
+        </div>
+      </div>
+      <%= submit_tag("Log In", {:class => "btn btn-primary"}) %>
+    <% end %>
+  </fieldset>
+</div>
