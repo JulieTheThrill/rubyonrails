@@ -24,10 +24,26 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin_required
+    if user_is_admin
+      return true
+    else
+      redirect_to root_url
+      flash[:error] = "Access Denied"
+      return false
+    end
+  end
+
   private
 
   def current_user
     @current_user ||= User.find_by({id: session[:user_id]}) if session[:user_id]
   end
   helper_method :current_user
+
+  def user_is_admin
+    return false if current_user.nil?
+    return current_user.role == "prof"
+  end
+  helper_method :user_is_admin
 end
