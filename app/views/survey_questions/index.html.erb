@@ -1,8 +1,11 @@
-<h1>Listing survey_questions</h1>
+<h1>Listing Survey Questions</h1>
 
 <table>
   <thead>
     <tr>
+      <th>Part of Survey</th>
+      <th>Question</th>
+      <th>Question Type</th>
       <th></th>
       <th></th>
       <th></th>
@@ -12,6 +15,9 @@
   <tbody>
     <% @survey_questions.each do |survey_question| %>
       <tr>
+        <td><%= survey_question.survey.name %></td>
+        <td><%= survey_question.question %></td>
+        <td><%= survey_question.question_type %></td>
         <td><%= link_to 'Show', survey_question %></td>
         <td><%= link_to 'Edit', edit_survey_question_path(survey_question) %></td>
         <td><%= link_to 'Destroy', survey_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,17 +1,38 @@
 <%= form_for(@survey_question) do |f| %>
   <% if @survey_question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@survey_question.errors.count, "error") %> prohibited this survey_question from being saved:</h2>
-
-      <ul>
-      <% @survey_question.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@survey_question.errors.count, "error") %> prohibited this survey_question from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="Signup_Errors">
+        <% @survey_question.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
   <div class="actions">
+    <div class="form-group">
+      <%= label_tag "question", "Question", {:class => "col-lg-2 control-label"} %>
+      <div class="col-lg-10">
+        <%= f.text_field :question, {:class => "form-control", :placeholder => "Question"} %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag "question_type", "Question Type", {:class => "col-lg-2 control-label"} %>
+      <div class="col-lg-10">
+        <%= f.select :question_type, type_options, {}, {:class => "form-control"}  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag "response_list", "List of Possible Responses", {:class => "col-lg-2 control-label"} %>
+      <div class="col-lg-10">
+        <%= f.text_field :response_list, {:class => "form-control", :placeholder => "response_1,response_2"} %>
+      </div>
+    </div>
     <%= f.submit %>
   </div>
 <% end %>
