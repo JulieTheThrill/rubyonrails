@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rubyonrails</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <title>Ruby Tuesdays</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
 
-<%= yield %>
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><i class="icon-home"></i> Home</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Days <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Day One: Setting Up Your Environment", controller: "days", action: "one" %></li>
+              </ul>
+            </li>
+            <li><a href="http://www.pace.edu/continuing-professional-education/walking-then-running-ruby-rails">Pace University Course</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/JulieTheThrill/rubyonrails"><i class="icon-github"></i> This Website's Git Repository</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://www.zenspider.com/Languages/Ruby/QuickRef.html"><i class="icon-info-sign"></i> Ruby Quick Reference</a></li>
+                <li><a href="http://guides.rubyonrails.org/"><i class="icon-info-sign"></i> Rails Guides</a></li>
+                <li class="divider"></li>
+                <li><a href="http://git-scm.com/video/what-is-git"><i class="icon-facetime-video"></i> Git Help Videos</a></li>
+                <li><a href="http://www.youtube.com/GitHubGuides"><i class="icon-facetime-video"></i> Github Help Videos</a></li>
+                <li class="divider"></li>
+                <li><a href="http://www.codecademy.com/tracks/ruby"><i class="icon-puzzle-piece"></i> Ruby on CodeAcademy</a></li>
+                <li><a href="http://railsforzombies.org/"><i class="icon-puzzle-piece"></i> Rails Zombies Tutorial</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
 
+    <%= yield %>
+
+  </div>
 </body>
 </html>
