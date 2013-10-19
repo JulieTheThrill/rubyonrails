@@ -1,5 +1,11 @@
 <h2><%= @survey.name %></h2>
 <p><%= @survey.description %></p>
 
+<ul>
+  <% for q in @survey.survey_questions %>
+    <li><%= h q.question %></li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>
