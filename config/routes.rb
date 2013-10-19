@@ -1,5 +1,8 @@
 Rubyonrails::Application.routes.draw do
   resources :survey_responses
+
+  resources :survey_questions
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
