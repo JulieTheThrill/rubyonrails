@@ -1,38 +1,34 @@
-<h2><%= @survey.name %></h2>
+<div class="well">
+    <fieldset>
+      <legend><%= @survey.name %></legend>
 
-<%= form_for(@survey, :url => submit_survey_survey_path) do |f| %>
-  <table>
-    <thead>
-      <tr>
-        <td>Questions</td>
-        <td>Answer</td>
-      </tr>
-    </thead>
-    <tbody>
+    <%= form_for(@survey, :url => submit_survey_survey_path) do |f| %>
       <% @survey.survey_questions.each do |question| %>
-        <tr>
-          <td><%= question.question %></td>
-          <td>
+        <div class="form-group">
+        <%= label_tag "username_or_email", question.question, {:class => "col-lg-2 control-label"} %>
+        <div class="col-lg-10">
           <%= f.fields_for :survey_questions, question do |q| %>
             <%= q.hidden_field :question, value: question.question %>
             <%= q.fields_for :survey_responses, question.survey_responses.build do |a| %>
               <% if question.is_multiple_choice? %>
                 <% question.response_list.split(",").each do |response| %>
-                  <%= a.radio_button :response, response %>
-                  <%= a.label :response, prettify(response) %>
+                  <div class="radio">
+                    <%= a.label "response_#{response}", prettify(response) %>
+                    <%= a.radio_button :response, response %>
+                  </div>
                 <% end %>
               <% elsif question.is_text_response? %>
-                <%= a.text_area :response %>
+                <%= a.text_area :response, {:class => "form-control", :rows => "3"} %>
               <% end %>
               <%= a.hidden_field :user_id, value: current_user.id %>
             <% end %>
           <% end %>
-          </td>
-        </tr>
+        </div>
+      </div>
       <% end %>
-    </tbody>
-  </table>
-  <div class="actions">
-    <%= f.submit "Submit Survey" %>
-  </div>
-<% end %>
+      <div class="actions">
+        <%= f.submit "Submit Survey", {:class => "btn btn-primary"} %>
+      </div>
+    <% end %>
+  </fieldset>
+</div>
