@@ -4,8 +4,8 @@ class SurveyQuestion < ActiveRecord::Base
   has_many :users, through: :survey_responses
   accepts_nested_attributes_for :survey_responses, reject_if: proc { |a| a[:response].blank? }
 
-  MULT_CHOICE = 1
-  TEXT_RESPONSE = 2
+  MULT_CHOICE = "1"
+  TEXT_RESPONSE = "2"
 
   QUESTION_TYPES = {
     MULT_CHOICE => "Multiple Choice",
@@ -16,12 +16,24 @@ class SurveyQuestion < ActiveRecord::Base
     return QUESTION_TYPES
   end
 
+  def type_in_words
+    return QUESTION_TYPES[self.question_type]
+  end
+
   def is_multiple_choice?
-    return self.question_type == MULT_CHOICE.to_s
+    return self.question_type == MULT_CHOICE
   end
 
   def is_text_response?
-    return self.question_type == TEXT_RESPONSE.to_s
+    return self.question_type == TEXT_RESPONSE
+  end
+
+  def responses_list_array
+    return self.response_list.split(",")
+  end
+
+  def responses_for_value(val)
+    return self.survey_responses.select{|response| response.response == val}
   end
 
 end

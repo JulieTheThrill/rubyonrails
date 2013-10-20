@@ -1,11 +1,24 @@
-<h2><%= @survey.name %></h2>
+<h2>Results for Survey: "<%= @survey.name %>"</h2>
 <p><%= @survey.description %></p>
 
-<h3>Questions</h3>
-<% @survey.survey_questions.each_with_index do |q, index| %>
-  <p><%= "#{index + 1}) #{h q.question}" %></p>
-  <p><%= "Type: #{h q.question_type}" %></p>
-  <p><%= "Responses: #{h q.response_list.gsub("_", "").split(",").to_sentence}" %></p>
+<% @survey.survey_questions.each_with_index do |question, index| %>
+  <div class="well">
+    <fieldset>
+      <legend><%= "#{index + 1}) #{h question.question}" %></legend>
+      <% if question.is_multiple_choice? %>
+        <% question.responses_list_array.each do |possible_response| %>
+          <%= possible_response %>:
+          <%= question.responses_for_value(possible_response).count %>
+          <br />
+        <% end %>
+      <% else %>
+        <% question.survey_responses.each do |response| %>
+          <p><%= response.response %></p>
+          <hr />
+        <% end %>
+      <% end %>
+    </fieldset>
+  </div>
 <% end %>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
