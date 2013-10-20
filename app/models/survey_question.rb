@@ -16,10 +16,6 @@ class SurveyQuestion < ActiveRecord::Base
     return QUESTION_TYPES
   end
 
-  def type_in_words
-    return QUESTION_TYPES[self.question_type]
-  end
-
   def is_multiple_choice?
     return self.question_type == MULT_CHOICE
   end

@@ -18,8 +18,8 @@
             <%= q.fields_for :survey_responses, question.survey_responses.build do |a| %>
               <% if question.is_multiple_choice? %>
                 <% question.response_list.split(",").each do |response| %>
-                  <%= a.radio_button :response, response.gsub(" ", "_").downcase %>
-                  <%= a.label :response, response %>
+                  <%= a.radio_button :response, response %>
+                  <%= a.label :response, prettify(response) %>
                 <% end %>
               <% elsif question.is_text_response? %>
                 <%= a.text_area :response %>

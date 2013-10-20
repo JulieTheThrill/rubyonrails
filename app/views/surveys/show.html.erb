@@ -7,7 +7,7 @@
       <legend><%= "#{index + 1}) #{h question.question}" %></legend>
       <% if question.is_multiple_choice? %>
         <% question.responses_list_array.each do |possible_response| %>
-          <%= possible_response %>:
+          <%= prettify(possible_response) %>:
           <%= question.responses_for_value(possible_response).count %>
           <br />
         <% end %>
