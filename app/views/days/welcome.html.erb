@@ -1,4 +1,6 @@
 <h1>Welcome!</h1>
 
-<p><%= link_to "Take Welcome Survey", controller: "surveys", action: "take_survey", id: @welcome_survey.id %></p>
+<% if @welcome_survey %>
+  <p><%= link_to "Take Welcome Survey", controller: "surveys", action: "take_survey", id: @welcome_survey.id %></p>
+<% end %>
 <p><%= link_to "Day One: Setting Up Your Environment", controller: "days", action: "one" %></p>
