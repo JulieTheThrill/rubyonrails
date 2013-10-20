@@ -31,7 +31,11 @@ Rubyonrails::Application.routes.draw do
   get 'logout' => 'sessions#logout'
 
   resources :surveys do
-    get 'take_survey'
+    member do
+      get 'take_survey'
+      post 'submit_survey'
+      patch 'submit_survey'
+    end
   end
 
   # Example resource route with options:

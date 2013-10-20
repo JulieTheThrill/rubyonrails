@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   validates :u_number, presence: true, uniqueness: true
   validates_presence_of :password, :on => :create
 
+  has_many :survey_responses
+  has_many :survey_questions, through: :survey_responses
+
   has_secure_password
 
   def self.authenticate(username_or_email = "", login_password = "")

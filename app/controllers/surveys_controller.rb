@@ -1,10 +1,13 @@
 class SurveysController < ApplicationController
-  before_action :set_survey, only: [:show, :edit, :update, :destroy, :take_survey]
-  before_filter :admin_required, except: [:take_survey]
+  before_action :set_survey, only: [:show, :edit, :update, :destroy, :take_survey, :submit_survey]
+  before_filter :admin_required, except: [:take_survey, :submit_survey]
   before_filter :login_required, only: [:take_survey]
 
+  # GET /surveys/:id/take_survey
   def take_survey
-
+    @survey.survey_questions.each do |question|
+      question.survey_responses.build(user_id: current_user.id)
+    end
   end
 
   # GET /surveys
@@ -44,6 +47,19 @@ class SurveysController < ApplicationController
     end
   end
 
+  def submit_survey
+    respond_to do |format|
+      if @survey.update(survey_params)
+        format.html { redirect_to root_url, notice: 'Thanks for taking the survey!' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @survey.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   # PATCH/PUT /surveys/1
   # PATCH/PUT /surveys/1.json
   def update
@@ -76,6 +92,9 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:name, :description, survey_questions_attributes: [:id, :question, :question_type, :response_list, :_destroy] )
+      params.require(:survey).permit(:name, :description,
+        survey_questions_attributes: [:id, :question, :question_type, :response_list, :_destroy,
+          survey_responses_attributes: [:id, :response, :user_id]
+        ])
     end
 end

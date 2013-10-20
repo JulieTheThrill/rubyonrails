@@ -1,6 +1,8 @@
 class SurveyQuestion < ActiveRecord::Base
   belongs_to :survey
   has_many :survey_responses, dependent: :destroy
+  has_many :users, through: :survey_responses
+  accepts_nested_attributes_for :survey_responses, reject_if: proc { |a| a[:response].blank? }
 
   MULT_CHOICE = 1
   TEXT_RESPONSE = 2
