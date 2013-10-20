@@ -25,4 +25,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    ModelMailer.forgot_password(self).deliver
+  end
+
+  private
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.hex[0,10].upcase
+    end while self.class.exists?(column => self[column])
+  end
+
 end

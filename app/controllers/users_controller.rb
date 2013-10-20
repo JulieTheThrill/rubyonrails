@@ -24,8 +24,7 @@ class UsersController < ApplicationController
 
   def send_reset_password
     if user = User.find_by(email: params[:email])
-      # set new password
-      ModelMailer.forgot_password(params[:email]).deliver
+      user.send_password_reset
       flash[:notice] = "Password Reset Sent to #{params[:email]}"
       flash[:color]= "valid"
       redirect_to root_url
@@ -36,9 +35,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_password_reset
+    if @user = User.find_by_password_reset_token(params[:id])
+    else
+      flash[:error] = "Password Reset Token Expired. Try to send another."
+      redirect_to reset_password_path
+    end
+  end
+
+  def update_password_reset
+    @user = User.find_by_password_reset_token!(params[:id])
+    if @user.password_reset_sent_at < 2.hours.ago
+      flash[:error] = "Password Reset Token Expired"
+      redirect_to reset_password_path
+    elsif @user.update_attributes(user_params)
+      flash[:notice] = "Password has been reset. You can log in now"
+      redirect_to root_url
+    else
+      render :edit
+    end
+  end
 
   private
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :u_number, :username, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :u_number, :username, :email, :password, :password_confirmation, :password_reset_token)
     end
 end

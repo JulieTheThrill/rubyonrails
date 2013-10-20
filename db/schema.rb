@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019225541) do
+ActiveRecord::Schema.define(version: 20131020181701) do
 
   create_table "survey_questions", force: true do |t|
     t.integer  "survey_id"
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20131019225541) do
     t.string   "u_number"
     t.string   "email"
     t.text     "password_digest"
-    t.string   "role",            default: "student"
+    t.string   "role",                   default: "student"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end

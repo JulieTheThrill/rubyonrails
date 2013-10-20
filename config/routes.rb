@@ -24,7 +24,12 @@ Rubyonrails::Application.routes.draw do
 
   get 'signup' => 'users#new'
 
-  resources :users
+  resources :users do
+    member do
+      get 'edit_password_reset'
+      patch 'update_password_reset'
+    end
+  end
 
   get 'reset_password' => 'users#reset_password'
   post 'send_reset_password' => 'users#send_reset_password'
