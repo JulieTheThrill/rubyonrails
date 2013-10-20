@@ -1,6 +1,6 @@
-<h1>Listing surveys</h1>
+<h1>Viewing all surveys</h1>
 
-<table>
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
       <th>Survey Name</th>
@@ -14,8 +14,8 @@
     <% @surveys.each do |survey| %>
       <tr>
         <td><%= survey.name %></td>
-        <td><%= link_to 'View Results', survey %> | </td>
-        <td><%= link_to 'Edit Questions', edit_survey_path(survey) %> | </td>
+        <td><%= link_to 'View Responses', survey %> </td>
+        <td><%= link_to 'Edit Questions', edit_survey_path(survey) %>  </td>
         <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

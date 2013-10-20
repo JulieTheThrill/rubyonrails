@@ -1,4 +1,4 @@
-<h2>Results for Survey: "<%= @survey.name %>"</h2>
+<h2>Responses for Survey: "<%= @survey.name %>"</h2>
 <p><%= @survey.description %></p>
 
 <% @survey.survey_questions.each_with_index do |question, index| %>
@@ -21,5 +21,5 @@
   </div>
 <% end %>
 
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
-<%= link_to 'Back', surveys_path %>
+<%= link_to 'Back to all surveys', surveys_path, {:class => "btn btn-default"} %>
+<%= link_to 'Edit this survey', edit_survey_path(@survey), {:class => "btn btn-default"} %>

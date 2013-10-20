@@ -1,6 +1,6 @@
 <div class="well">
-    <fieldset>
-      <legend><%= @survey.name %></legend>
+  <fieldset>
+    <legend><%= @survey.name %></legend>
 
     <%= form_for(@survey, :url => submit_survey_survey_path) do |f| %>
       <% @survey.survey_questions.each do |question| %>
