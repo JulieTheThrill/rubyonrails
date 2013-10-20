@@ -59,6 +59,7 @@
           <%= f.password_field :password_confirmation, {:class => "form-control", :placeholder => "Confirm"} %>
         </div>
       </div>
+      <p>Already have an account? <%= link_to "Log In", controller: "sessions", action: "login" %></p>
       <%= f.submit :Signup, {:class => "btn btn-primary"} %>
     <% end %>
   </fieldset>
