@@ -49,13 +49,22 @@
                 <li><a href="http://www.codecademy.com/tracks/ruby"><i class="icon-puzzle-piece"></i> Ruby on CodeAcademy</a></li>
                 <li><a href="http://railsforzombies.org/"><i class="icon-puzzle-piece"></i> Rails Zombies Tutorial</a></li>
               </ul>
+
               <% if current_user %>
-                <li><a href="#">Welcome, <%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></a></li>
-                <li><a href="/logout">Log Out</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/logout">Log Out</a></li>
+                  <% if user_is_admin %>
+                    <li><a href="/surveys">View Surveys</a></li>
+                  <% end %>
+                </ul>
+              </li>
               <% else %>
                 <li><a href="/login">Log In</a></li>
                 <li><a href="/signup">Sign Up</a></li>
               <% end %>
+
             </li>
           </ul>
         </div><!-- /.nav-collapse -->
