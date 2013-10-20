@@ -34,6 +34,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def login_required
+    if current_user.nil?
+      redirect_to controller: "sessions", action: "login"
+      flash[:error] = "Please login!"
+      return false
+    end
+    return true
+  end
+
   private
 
   def current_user
@@ -46,4 +55,5 @@ class ApplicationController < ActionController::Base
     return current_user.role == "prof"
   end
   helper_method :user_is_admin
+
 end

@@ -1,6 +1,7 @@
 class SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :edit, :update, :destroy, :take_survey]
   before_filter :admin_required, except: [:take_survey]
+  before_filter :login_required, only: [:take_survey]
 
   def take_survey
 
