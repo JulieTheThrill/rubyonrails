@@ -17,6 +17,8 @@
       </div>
       <p>Don't have an account yet? <%= link_to "Signup", controller: "users", action: "new" %></p>
       <%= submit_tag("Log In", {:class => "btn btn-primary"}) %>
+
+      <%= link_to "Reset Password", controller: "users", action: "reset_password" %>
     <% end %>
   </fieldset>
 </div>

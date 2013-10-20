@@ -26,6 +26,9 @@ Rubyonrails::Application.routes.draw do
 
   resources :users
 
+  get 'reset_password' => 'users#reset_password'
+  post 'send_reset_password' => 'users#send_reset_password'
+
   get 'login' => 'sessions#login'
   post 'login_attempt' => 'sessions#login_attempt'
   get 'logout' => 'sessions#logout'
