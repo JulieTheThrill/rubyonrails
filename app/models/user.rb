@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   validates :username, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :u_number, presence: true, uniqueness: true
   validates_presence_of :password, :on => :create
 
   has_many :survey_responses
