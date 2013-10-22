@@ -16,7 +16,7 @@
         </div>
       </div>
     <% end %>
-    <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+    <%= form_for(:user, html: {id: "signup_form"}, :url => {:controller => 'users', :action => 'create'}) do |f| %>
       <div class="form-group">
         <%= label_tag "username", "Username*", {:class => "col-lg-2 control-label"} %>
         <div class="col-lg-10">
@@ -58,3 +58,7 @@
     <% end %>
   </fieldset>
 </div>
+<script>
+  mixpanel.track("Start Signup");
+  mixpanel.track_forms("#signup_form", "Created Account");
+</script>
